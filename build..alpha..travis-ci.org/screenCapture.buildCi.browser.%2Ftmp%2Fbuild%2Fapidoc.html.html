@@ -1,0 +1,129 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a>express-messages (v1.0.1)</a>
+</h1>
+<h4>Express flash notification message rendering</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.express-messages">module express-messages</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.express-messages.express-messages">
+            function <span class="apidocSignatureSpan"></span>express-messages
+            <span class="apidocSignatureSpan">(req, res)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.express-messages" id="apidoc.module.express-messages">module express-messages</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.express-messages.express-messages" id="apidoc.element.express-messages.express-messages">
+        function <span class="apidocSignatureSpan"></span>express-messages
+        <span class="apidocSignatureSpan">(req, res)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">express-messages = function (req, res) {
+  return function (template, locals) {
+    var flash = req.flash()
+      , types = Object.keys(flash)
+      , output = '';
+
+    if (types.length) {
+      if (template) {
+        locals = locals || {};
+        locals.messages = flash;
+        res.render(template, locals, function (err, html) {
+          if (html) {
+            output = html;
+          }
+        });
+      } else {
+        var buf = [];
+        buf.push('&lt;div id="messages"&gt;');
+        types.forEach(function (type) {
+          var msgs = flash[type];
+          if (msgs) {
+            buf.push('  &lt;ul class="' + type + '"&gt;');
+            msgs.forEach(function (msg) {
+              buf.push('    &lt;li&gt;' + msg + '&lt;/li&gt;');
+            });
+            buf.push('  &lt;/ul&gt;');
+          }
+        });
+        buf.push('&lt;/div&gt;');
+        output = buf.join('\n');
+      }
+    }
+
+    return output;
+  };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
